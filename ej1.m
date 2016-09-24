@@ -1,5 +1,4 @@
-function algunaFunction(N, NZR)
-
+function RSMMatrix = getRSMMatrix(N, NZR)
 	if (floor(N) != N)
 		printf('Dimension N must be integer\n');
 		return;
@@ -20,9 +19,13 @@ function algunaFunction(N, NZR)
 		printf('Dimension N cannot be less than NZR value\n');
 		return;
 	end
+	generateRSM(N, NZR);
+end
+
+% N can be between 46300 and 46400
+function generateRSM(N, NZR)
 
 	A = zeros(N); 	% A holds the future NZR Matrix
-
 	for columnIndex = 1 : N
 		for i = 1 : NZR
 			do
@@ -33,7 +36,7 @@ function algunaFunction(N, NZR)
 			until (A(rowIndex, columnIndex) != 0)				% Checks if the given number is zero;
 		end
 	end
-	A
+	A;
 end
 
 
