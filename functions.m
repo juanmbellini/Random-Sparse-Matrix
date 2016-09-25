@@ -40,25 +40,33 @@ end
 
 
 
-function gramSchmidt = getGramSchmidt(matrix)
-	gramSchmidt = matrix;
+
+function [Q R] = classicalQRDecomposition(matrix)
+	Q = matrix;
 	for i = 1 : columns(matrix)
 		for j = 1 : (i - 1)
-			scalarProduct = matrix(:, i)' * gramSchmidt(:, j);
-			aux = scalarProduct * gramSchmidt(:, j);
-			gramSchmidt(:, i) -= aux;
+			scalarProduct = matrix(:, i)' * Q(:, j);
+			Q(:, i) -= scalarProduct * Q(:, j);
 		end
-		gramSchmidt(:, i) /= norm(gramSchmidt(:, i));
+		Q(:, i) /= norm(Q(:, i));
 	end
-
-end
-
-
-
-function [Q R] = getQRDecomposition(matrix)
-	Q = getGramSchmidt(matrix);
 	R = Q' * matrix;
 end
+
+
+function [Q R] = modifiedQRDecomposition(matrix)
+	Q = matrix;
+	cols = columns(matrix);
+	for i = 1 : cols
+		R(i, i) = norm(matrix(:, i));
+		Q(:, i) = matrix(:, i) / R(i, i);
+		for j = i + 1 : cols
+			R(i, j) =  matrix(:, j)' * Q(:, i);
+			matrix(:, j) -=  R(i, j) * Q(:, i);
+		end
+	end
+end
+
 
 
 
