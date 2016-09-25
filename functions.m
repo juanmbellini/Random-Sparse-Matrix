@@ -19,12 +19,11 @@ function RSMMatrix = getRSMMatrix(N, NZR)
 		printf('Dimension N cannot be less than NZR value\n');
 		return;
 	end
-	generateRSM(N, NZR);
+	RSMMatrix = generateRSM(N, NZR);
 end
 
 % N can be between 46300 and 46400
-function generateRSM(N, NZR)
-
+function RSMMatrix = generateRSM(N, NZR)
 	A = zeros(N); 	% A holds the future NZR Matrix
 	for columnIndex = 1 : N
 		for i = 1 : NZR
@@ -36,8 +35,34 @@ function generateRSM(N, NZR)
 			until (A(rowIndex, columnIndex) != 0)				% Checks if the given number is zero;
 		end
 	end
-	A;
+	RSMMatrix = A;
 end
+
+
+
+function gramSchmidt = getGramSchmidt(matrix)
+	gramSchmidt = matrix;
+	for i = 1 : columns(matrix)
+		for j = 1 : (i - 1)
+			scalarProduct = matrix(:, i)' * gramSchmidt(:, j);
+			aux = scalarProduct * gramSchmidt(:, j);
+			gramSchmidt(:, i) -= aux;
+		end
+		gramSchmidt(:, i) /= norm(gramSchmidt(:, i));
+	end
+
+end
+
+
+
+function [Q R] = getQRDecomposition(matrix)
+	Q = getGramSchmidt(matrix);
+	R = Q' * matrix;
+end
+
+
+
+% Arnoldi iteration
 
 
 function debug(string) 
