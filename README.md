@@ -11,7 +11,7 @@ Luego llamar a la función `getEigenvaluesForRSM` que recibe los siguientes par�
 - N: dimensión NxN de la matriz
 - NZR: valores distintos a zero de las columnas de la matriz a generar
 - error: delta error al calcular los autovalores
-- decomposition: método de decomposición a utilizar (1: Gram-Schmidt, 2: Gram-Schmidt modificado)
+- decomposition: método de decomposición a utilizar (1: Gram-Schmidt, 2: Gram-Schmidt modificado, 3: Rotaciones de Givens)
 
 La función retorna la matríz utilizada y en `A` y los autovalores en `eigenvalues`.
 
