@@ -5,7 +5,13 @@ function [Q R] = gramSchmidtQRDecomposition(matrix)
 			scalarProduct = matrix(:, i)' * Q(:, j);
 			Q(:, i) -= scalarProduct * Q(:, j);
 		end
-		Q(:, i) /= norm(Q(:, i));
+		%si la norma es 0 la columna era L.D
+		%entonces pongo 0s
+		if(norm(Q(:,i))<0.00001)
+			Q(:,i) = zeros(length(Q(1)),1);
+		else
+			Q(:, i) /= norm(Q(:, i));
+		end
 	end
 	R = Q' * matrix;
 end
