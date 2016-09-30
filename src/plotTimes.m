@@ -4,6 +4,6 @@ function plotTimes(times)
   title('Benchmark de descomposiciones para el cálculo de autovalores');
   xlabel('Tamaño de la matriz (NxN)');
   ylabel('Tiempo (s)');
-  [legh,objh,outh,outm] = legend({"Modified Gram Shmit","Givens Rotations"});
+  [legh,objh,outh,outm] = legend({"Modified Gram Schmidt","Givens Rotations"});
   set(objh,'linewidth',2);
 end
