@@ -5,10 +5,9 @@ function [Q R] = gramSchmidtQRDecomposition(matrix)
 			scalarProduct = matrix(:, i)' * Q(:, j);
 			Q(:, i) -= scalarProduct * Q(:, j);
 		end
-		%si la norma es 0 la columna era L.D
-		%entonces pongo 0s
+    % If vector norm is 0, then it's transformed into 0s vector
 		if(norm(Q(:,i))<0.00001)
-			Q(:,i) = zeros(length(Q(1)),1);
+			Q(:,i) = zeros(rows(Q),1);
 		else
 			Q(:, i) /= norm(Q(:, i));
 		end
